@@ -14,21 +14,36 @@ const defaulutTodos = [
 ];
 
 function App() {
+  const [todos, setTodos] = React.useState(defaulutTodos);
   const [searchValue, setSearchValue] = React.useState("");
   let searchedTodos = [];
 
   if (searchValue.length >= 1) {
-    searchedTodos = defaulutTodos.filter((todo) => {
+    searchedTodos = todos.filter((todo) => {
       const searchText = searchValue.toLowerCase();
       const todoText = todo.text.toLocaleLowerCase();
       return todoText.includes(searchText);
     });
   } else {
-    searchedTodos = defaulutTodos;
+    searchedTodos = todos;
   }
 
-  const totalTodos = searchedTodos.length;
-  const completedTodos = searchedTodos.filter((todo) => todo.completed).length;
+  const totalTodos = todos.length;
+  const completedTodos = todos.filter((todo) => todo.completed).length;
+
+  const onCompleted = (text) => {
+    const todoIndex = todos.findIndex((todo) => todo.text === text);
+    const newTodos = [...todos];
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    setTodos(newTodos);
+  };
+
+  const onDeleted = (text) => {
+    const todoIndex = todos.findIndex((todo) => todo.text === text);
+    const newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  };
 
   return (
     <React.Fragment>
@@ -41,6 +56,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onCompleted={() => onCompleted(todo.text)}
+            onDeleted={() => onDeleted(todo.text)}
           />
         ))}
       </TodoList>
