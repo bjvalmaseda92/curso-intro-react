@@ -1,10 +1,5 @@
 import React from "react";
-import { TodoCounter } from "./TodoCounter";
-import { TodoSearch } from "./TodoSearch";
-import { TodoList } from "./TodoList";
-import { TodoItem } from "./TodoItem";
-import { CreateTodoButton } from "./CreateTodoButton";
-// import './App.css';
+import { AppUI } from "./AppUI";
 
 const defaulutTodos = [
   { text: "Cortar cebolla", completed: true },
@@ -46,24 +41,15 @@ function App() {
   };
 
   return (
-    <React.Fragment>
-      <TodoCounter total={totalTodos} completed={completedTodos} />
-      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-
-      <TodoList>
-        {searchedTodos.map((todo) => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onCompleted={() => onCompleted(todo.text)}
-            onDeleted={() => onDeleted(todo.text)}
-          />
-        ))}
-      </TodoList>
-
-      <CreateTodoButton />
-    </React.Fragment>
+    <AppUI
+      completedTodos={completedTodos}
+      totalTodos={totalTodos}
+      searchValue={searchValue}
+      searchedTodos={searchedTodos}
+      setSearchValue={setSearchValue}
+      onCompleted={onCompleted}
+      onDeleted={onDeleted}
+    />
   );
 }
 
