@@ -8,6 +8,8 @@ import { CreateTodoButton } from "./components/CreateTodoButton/CreateTodoButton
 
 function AppUI({
   completedTodos,
+  loading,
+  error,
   totalTodos,
   searchedTodos,
   searchValue,
@@ -19,7 +21,9 @@ function AppUI({
     <React.Fragment>
       <TodoCounter total={totalTodos} completed={completedTodos} />
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-
+      {loading && <p>Estamos cargando, por favor no desesperes...</p>}
+      {error && <p>Desepera ha ocurrido un error</p>}
+      {!loading && !searchedTodos.length && <p>Crea un nuevo todo</p>}
       <TodoList>
         {searchedTodos.map((todo) => (
           <TodoItem
