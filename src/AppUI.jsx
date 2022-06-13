@@ -8,6 +8,7 @@ import { CreateTodoButton } from "./components/CreateTodoButton/CreateTodoButton
 import { Modal } from "./components/Modal";
 import { Form } from "./components/Form";
 import { Loading } from "./components/States/Loading";
+import { TodoHeader } from "./components/TodoHeader";
 
 // import './App.css';
 
@@ -20,12 +21,17 @@ function AppUI() {
     onCompleted,
     openModal,
     setOpenModal,
+    completedTodos,
+    totalTodos,
+    setSearchValue,
   } = React.useContext(TodoContext);
 
   return (
     <React.Fragment>
-      <TodoCounter />
-      <TodoSearch />
+      <TodoHeader>
+        <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
+        <TodoSearch setSearchValue={setSearchValue} />
+      </TodoHeader>
       {loading && <Loading />}
       {error && <p>Desepera ha ocurrido un error</p>}
       {!loading && !searchedTodos.length && <p>Crea un nuevo todo</p>}
