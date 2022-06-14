@@ -37,11 +37,15 @@ function App() {
         <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
         <TodoSearch setSearchValue={setSearchValue} />
       </TodoHeader>
-      {loading && <Loading />}
-      {error && <p>Desepera ha ocurrido un error</p>}
-      {!loading && !searchedTodos.length && <p>Crea un nuevo todo</p>}
-      <TodoList>
-        {searchedTodos.map((todo) => (
+
+      <TodoList
+        error={error}
+        loading={loading}
+        searchedTodos={searchedTodos}
+        onError={() => <p>Desepera ha ocurrido un error</p>}
+        onLoading={() => <Loading />}
+        onEmpty={() => <p>Crea un nuevo todo</p>}
+        render={(todo) => (
           <TodoItem
             key={todo.text}
             text={todo.text}
@@ -49,8 +53,8 @@ function App() {
             onCompleted={() => onCompleted(todo.text)}
             onDeleted={() => onDeleted(todo.text)}
           />
-        ))}
-      </TodoList>
+        )}
+      />
 
       {openModal && (
         <Modal>
