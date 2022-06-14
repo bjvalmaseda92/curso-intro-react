@@ -34,7 +34,7 @@ function App() {
   } = useTodos();
   return (
     <React.Fragment>
-      <TodoHeader>
+      <TodoHeader loading={loading}>
         <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
         <TodoSearch setSearchValue={setSearchValue} />
       </TodoHeader>
