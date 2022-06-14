@@ -30,6 +30,7 @@ function App() {
     totalTodos,
     setSearchValue,
     onAdd,
+    searchValue,
   } = useTodos();
   return (
     <React.Fragment>
@@ -41,10 +42,13 @@ function App() {
       <TodoList
         error={error}
         loading={loading}
+        totalTodos={totalTodos}
+        searchText={searchValue}
         searchedTodos={searchedTodos}
         onError={() => <p>Desepera ha ocurrido un error</p>}
         onLoading={() => <Loading />}
         onEmpty={() => <p>Crea un nuevo todo</p>}
+        onEmptySearch={(searchText) => <p>No hay todos con {searchText} </p>}
         render={(todo) => (
           <TodoItem
             key={todo.text}
