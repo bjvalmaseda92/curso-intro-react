@@ -9,6 +9,7 @@ import { Form } from "./components/Form";
 import { Loading } from "./components/States/Loading";
 import { TodoHeader } from "./components/TodoHeader";
 import { useTodos } from "./useTodos";
+import { ChangeAlertWithStorageListener } from "./components/ChangeAlert";
 
 // const item = [
 //   { text: "Cortar cebolla", completed: true },
@@ -31,6 +32,7 @@ function App() {
     setSearchValue,
     onAdd,
     searchValue,
+    sincronizeTodo,
   } = useTodos();
   return (
     <React.Fragment>
@@ -66,6 +68,7 @@ function App() {
         </Modal>
       )}
 
+      <ChangeAlertWithStorageListener sincronize={sincronizeTodo} />
       <CreateTodoButton setOpenModal={setOpenModal} openModal={openModal} />
     </React.Fragment>
   );
