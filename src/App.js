@@ -9,7 +9,7 @@ import { Form } from "./components/Form";
 import { Loading } from "./components/States/Loading";
 import { TodoHeader } from "./components/TodoHeader";
 import { useTodos } from "./useTodos";
-import { ChangeAlertWithStorageListener } from "./components/ChangeAlert";
+import { ChangeAlert } from "./components/ChangeAlert";
 
 // const item = [
 //   { text: "Cortar cebolla", completed: true },
@@ -68,7 +68,7 @@ function App() {
         </Modal>
       )}
 
-      <ChangeAlertWithStorageListener sincronize={sincronizeTodo} />
+      <ChangeAlert sincronize={sincronizeTodo} />
       <CreateTodoButton setOpenModal={setOpenModal} openModal={openModal} />
     </React.Fragment>
   );
